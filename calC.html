@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         window.onload = function(){
+            var equation = '';
+
+            var clearBtn = document.getElementById('clearBtn');
+            clearBtn.addEventListener('click',function(){
+                equation = '';
+                document.getElementById('view').value=equation;
+
+            },false);
+
+            var btnSub = document.getElementById('btnSub');
+            var btnMul = document.getElementById('btnMul');
+            var btnSub = document.getElementById('btnSub');
+            var divBtn = document.getElementById('divBtn');
+            var btnAdd = document.getElementById('btnAdd');
+
+            btnSub.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='-';
+                document.getElementById('view').value = equation;
+                document.getElementById('res').value = result;
+            },false);
+            btnMul.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='*';
+                document.getElementById('view').value = equation;
+                document.getElementById('res').value = result;
+            },false);
+            divBtn.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='/';
+                document.getElementById('view').value = equation;
+                document.getElementById('res').value = result;
+            },false);
+            btnAdd.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='+';
+                document.getElementById('view').value = equation;
+                document.getElementById('res').value = result;
+            },false);
+            btn1.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='1';
+                document.getElementById('view').value = equation;
+            },false);
+            btn2.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='2';
+                document.getElementById('view').value = equation;
+            },false);
+            btn3.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='3';
+                document.getElementById('view').value = equation;
+            },false);
+            btn4.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='4';
+                document.getElementById('view').value = equation;
+            },false);
+            btn5.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='5';
+                document.getElementById('view').value = equation;
+            },false);
+            btn6.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='6';
+                document.getElementById('view').value = equation;
+            },false);
+            btn7.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='7';
+                document.getElementById('view').value = equation;
+            },false);
+            btn8.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='8';
+                document.getElementById('view').value = equation;
+            },false);
+            btn9.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='9';
+                document.getElementById('view').value = equation;
+            },false);
+            btn0.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = equation;
+                equation+='0';
+                document.getElementById('view').value = equation;
+            },false);
+
+            answer.addEventListener('click', function(){
+                var view = document.getElementById('view').value;
+                var result = eval(equation);
+                equation = result;
+                document.getElementById('view').value = result;
+            },false);
+
+         };
+    </script>
+</head>
+<body>
+    <input type="text" id="view">
+    <br/>
+    
+    <input type="button" value="1" id="btn1">
+    <input type="button" value="2" id="btn2">
+    <input type="button" value="3" id="btn3">
+    <input type="button" value="*" id="btnMul"><br/>
+    <input type="button" value="4" id="btn4">
+    <input type="button" value="5" id="btn5">
+    <input type="button" value="6" id="btn6">
+    <input type="button" value="-" id="btnSub"><br/>
+    <input type="button" value="7" id="btn7">
+    <input type="button" value="8" id="btn8">
+    <input type="button" value="9" id="btn9">
+    <input type="button" value="+" id="btnAdd"><br/>
+    <input type="button" value="Clr" id="clearBtn">
+    <input type="button" value="0" id="btn0">
+    <input type="button" value="=" id="answer">
+    <input type="button" value="/" id="divBtn">
+
+</body>
+</html>
