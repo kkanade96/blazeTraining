@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown</title>
+    <script>
+        window.onload = function () {
+            var Profession = [
+                'Un-Employeed', 'Employeed', 'Self-Employeed',
+                'Doctor', 'CA', 'CS', 'Driver', 'Teacher'
+            ];
+
+            var option;
+            for (var i = 0; i < Profession.length; i++) {
+                option += '<option value="' + Profession[i] + '">' + Profession[i] + '</option>';
+            }
+            // add all options as HTML inside the lstprofession
+            document.getElementById('lstprofession').innerHTML = option;
+
+
+            document.getElementById('lstnames')
+                .addEventListener('change', function () {
+                    document.getElementById('dv1').innerHTML = this.options[this.selectedIndex].value;
+                }, false);
+
+
+            document.getElementById('lstprofession')
+                .addEventListener('change', function () {
+                    document.getElementById('dv2').innerHTML = this.options[this.selectedIndex].value;
+                }, false);
+
+
+
+            // Lets create an Array of Objects
+
+            var Departments = [
+                { DeptNo: 10, DeptName: 'IT' },
+                { DeptNo: 20, DeptName: 'HR' },
+                { DeptNo: 30, DeptName: 'SL' },
+                { DeptNo: 40, DeptName: 'TR' },
+                { DeptNo: 50, DeptName: 'AC' }
+            ];
+
+            var Employees = [
+                { EmpNo: 101, EmpName: 'emp1', Salary: 10000, DeptNo: 10 },
+                { EmpNo: 102, EmpName: 'emp2', Salary: 20000, DeptNo: 20 },
+                { EmpNo: 103, EmpName: 'emp3', Salary: 30000, DeptNo: 30 },
+                { EmpNo: 104, EmpName: 'emp4', Salary: 11000, DeptNo: 40 },
+                { EmpNo: 105, EmpName: 'emp5', Salary: 21000, DeptNo: 50 },
+                { EmpNo: 106, EmpName: 'emp6', Salary: 31000, DeptNo: 10 },
+                { EmpNo: 107, EmpName: 'emp7', Salary: 41000, DeptNo: 20 },
+                { EmpNo: 108, EmpName: 'emp8', Salary: 51000, DeptNo: 30 },
+                { EmpNo: 109, EmpName: 'emp9', Salary: 61000, DeptNo: 40 },
+                { EmpNo: 110, EmpName: 'emp10', Salary: 71000, DeptNo: 50 }
+            ];
+
+            var dOptions;
+            for (var j = 0; j < Departments.length; j++) {
+                dOptions += '<option value="' + Departments[j].DeptNo + '">' + Departments[j].DeptName + '</option>';
+            }
+
+            document.getElementById('lstdept').innerHTML = dOptions;
+
+
+            document.getElementById('lstdept')
+                .addEventListener('change', function () {
+                    document.getElementById('dv3').innerHTML = 'Value = ' + this.options[this.selectedIndex].value
+                     + ' Text = ' + this.options[this.selectedIndex].text;
+                    // read the dno
+                    var dno = this.options[this.selectedIndex].value;
+                    console.log(dno);
+                    // passing Employees array and selected DeptNo
+                    genrateTable(Employees, dno);
+                }, false);
+
+                // display  table when the page is loaded for the first Time 
+                genrateTable(Employees,0);
+
+
+
+            // generate the tagble with tr in tbody dynamically
+            function genrateTable(Employees, dno) {
+                console.log('In method ' + dno);
+                var tbody = "";
+                if (parseInt(dno) === 0) {
+
+                    for (k = 0; k < Employees.length; k++) {
+                        tbody += "<tr><td>" + Employees[k].EmpNo + "</td><td>" + Employees[k].EmpName + "</td><td>" + Employees[k].Salary + "</td><td>" + Employees[k].DeptNo + "</td></tr>";
+                    }
+                } else {
+                    console.log('else' + dno);
+                    for (k = 0; k < Employees.length; k++) {
+                        
+                        if (Employees[k].DeptNo === parseInt(dno)) {
+                            tbody += "<tr><td>" + Employees[k].EmpNo + "</td><td>" + Employees[k].EmpName + "</td><td>" + Employees[k].Salary + "</td><td>" + Employees[k].DeptNo + "</td></tr>";
+                        }
+                    }
+                }
+                // add trs in tbody 
+                document.getElementById('tbody').innerHTML = tbody;
+
+            }
+
+
+        };
+    </script>
+</head>
+
+<body>
+    <h1>Dropdown</h1>
+    <div>
+        <label>Select Name</label>
+        <select id="lstnames">
+            <option value="Tejas">Tejas</option>
+            <option value="Mahesh">Mahesh</option>
+            <option value="Ramesh">Ramesh</option>
+            <option value="Ram">Ram</option>
+            <option value="Sabnis">Sabnis</option>
+        </select>
+        <div id="dv1"></div>
+    </div>
+    <hr>
+    <hr>
+    <div>
+        <label>Select Profession</label>
+        <select id="lstprofession"></select>
+        <div id="dv2"></div>
+    </div>
+    <hr>
+    <div>
+        <label>Select Department </label>
+        <select id="lstdept"></select>
+        <div id="dv3"></div>
+    </div>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>Employee No</th>
+                <th>EmployeeName</th>
+                <th>Salary</th>
+                <th>Deptartment No</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+</body>
+
+</html>
