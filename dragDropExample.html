@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag Drop</title>
+    <script>
+        window.onload = function () {
+            var newId = "-";
+            var lis = document.getElementsByTagName("li");
+            // iterating on all typle of 'INPUTS'
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].addEventListener('dragstart', function (event) {
+                    event.dataTransfer.setData('text', event.target.id)
+                }, false);
+            }
+
+            var dropTarget = document.getElementById("dropTarget");
+
+            dropTarget.addEventListener('drop', function (event) {
+                // drops all other operations so that drop is completed
+                event.preventDefault();
+                var id = event.dataTransfer.getData('text');
+                console.log("--> value is " + id);
+                var td = document.createElement("td");
+                td.appendChild(document.createTextNode(id))
+
+
+                var newTxtArea = document.createElement("input");
+                // var val = document.getElementById("id").value;
+                newTxtArea.id = "txt-" + id;
+                // newTxtArea.value = id;
+                newId = "txt-" + id;
+                console.log(newId)
+                newTxtArea.appendChild(document.createTextNode(id))
+                td.appendChild(newTxtArea);
+
+                var btnn = document.createElement("input");
+                btnn.type
+                event.target.appendChild(td);
+
+                var newTxt = document.getElementById(newId);
+                if (newTxt != null) {
+                    newTxt.addEventListener('change', function () {
+                        var secondaVariable = document.getElementById(newId).value;
+                        console.log(parseInt(id) * secondaVariable);
+                        var displayAns = document.createElement("input");
+                        displayAns.value = parseInt(id) * secondaVariable;
+                        td.appendChild(displayAns);
+
+                    }, false);
+                }
+            }, false);
+
+            dropTarget.addEventListener('dragover', function (event) {
+                event.preventDefault();
+            }, false)
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <h3 style="color: red;">Drag Drop(HTML 5) Example</h3>
+    <hr>
+    <ul id="dragSource">
+        <li draggable="true" id="50" style="height: 50px;width: 120px;">
+            Mask 50
+        </li>
+        <li draggable="true" id="30" style="height: 50px;width: 120px;">
+            Sanitizer 30 INR
+
+        </li>
+        <li draggable="true" id="40" style="height: 50px;width: 120px;">
+            Glove 40 INR
+        </li>
+        <li draggable="true" id="800" style="height: 50px;width: 120px;">
+            PPE Kit 800 INR
+        </li>
+    </ul>
+    <hr>
+    <h2>DROP BELOW</h2>
+    <ul id="dropTarget" style="height: 100px;width: 400px;">
+
+    </ul>
+</body>
+
+</html>
