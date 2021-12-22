@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee App</title>
+    <style>
+        .dissable{
+            pointer-events: none;
+             cursor: default;
+             color: black;
+             background-color: chartreuse;
+        }
+    </style>
+    <!--Refer the bootstrap CSS from the local installation-->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <link rel="stylesheet" href="./../../../Blazmeanbatch3-main/node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
+    <script>
+        window.onload = function () {
+            var Employees = [
+                { EmpNo: "1", EmpName: "Kajal", DeptName: "IT", Salary: "100", Designation: "Cloud App Developer" },
+                { EmpNo: "2", EmpName: "Praachi", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "3", EmpName: "Janvi", DeptName: "IDK", Salary: "400", Designation: "BA" },
+                { EmpNo: "4", EmpName: "Himani", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "5", EmpName: "Soumya", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "6", EmpName: "Himani", DeptName: "IT", Salary: "100", Designation: "Cloud App Developer" },
+                { EmpNo: "7", EmpName: "Rutuja", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "8", EmpName: "Zareen", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "9", EmpName: "saba", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "10", EmpName: "Samina", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "11", EmpName: "Aaditi", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "12", EmpName: "Mohini", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "13", EmpName: "Shruti", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "14", EmpName: "Gauri", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "15", EmpName: "Praachi", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+
+                { EmpNo: "16", EmpName: "Mohini", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "17", EmpName: "Apurva", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "18", EmpName: "Pratichi", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+
+                { EmpNo: "19", EmpName: "Kajal", DeptName: "IT", Salary: "100", Designation: "Cloud App Developer" },
+                { EmpNo: "20", EmpName: "Himani", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "21", EmpName: "Janvi", DeptName: "IDK", Salary: "400", Designation: "BA" },
+                { EmpNo: "22", EmpName: "Praachi", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "23", EmpName: "Ankita", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "24", EmpName: "Praachi", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "25", EmpName: "Kajal", DeptName: "IT", Salary: "100", Designation: "Cloud App Developer" },
+                { EmpNo: "26", EmpName: "Soumya", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "27", EmpName: "Mohini", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "28", EmpName: "Gauri", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "29", EmpName: "shruti", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "30", EmpName: "Prajakta", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "31", EmpName: "Zareen", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "32", EmpName: "Rutuja", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "33", EmpName: "Saba", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "34", EmpName: "Samina", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+
+                { EmpNo: "35", EmpName: "Aaditi", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "36", EmpName: "Aafreen", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "37", EmpName: "Soumya", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "38", EmpName: "Praachi", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "39", EmpName: "Ankita", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+                { EmpNo: "40", EmpName: "Janvi", DeptName: "Accounts", Salary: "300", Designation: "Java Developer" },
+
+            ];
+            var space = " ";
+            var tbody = document.getElementById("tbdy");
+            for (var index = 0; index <= 4; index++) {
+                tbody.innerHTML += "<tr class='table-primary'><td>" + Employees[index].EmpNo + "</td><td>" + Employees[index].EmpName + "</td><td>" + Employees[index].Salary + "</td><td>" + Employees[index].DeptName + "</td><td>" + Employees[index].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + Employees[index].EmpNo + "' data-bs-toggle='modal' data-bs-target='#themodal'/></td></tr>";
+            }
+            document.getElementById("emppId").value = Employees[0].EmpNo;
+            document.getElementById("emppName").value = Employees[0].EmpName;
+            document.getElementById("emppSalary").value = Employees[0].Salary;
+
+            var updateBtn = document.getElementById("emppUpdate");
+            updateBtn.addEventListener('click', function () {
+                tbody.innerHTML = "";
+                var emppId = document.getElementById("emppId").value;
+                var emppName = document.getElementById("emppName").value;
+                var emppSalary = document.getElementById("emppSalary").value;
+                console.log()
+                Employees[0].EmpName = emppName;
+                Employees[0].Salary = emppSalary;
+                Employees[0].Designation = document.getElementById("emppDesign").value;
+                Employees[0].DeptName = document.getElementById("emppDept").value;
+
+                for (var index = 0; index <= 4; index++) {
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + Employees[index].EmpNo + "</td><td>" + Employees[index].EmpName + "</td><td>" + Employees[index].Salary + "</td><td>" + Employees[index].DeptName + "</td><td>" + Employees[index].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + Employees[index].EmpNo + "' data-bs-toggle='modal' data-bs-target='#themodal'/></td></tr>";
+                }
+            }, false);
+
+            var first = document.getElementById("first");
+            first.addEventListener('click', function () {
+                tbody.innerHTML = space;
+                var empNo = 0;
+                for (var i = 0; i <= 4; i++) {
+                    empNo = Employees[i].EmpNo;
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + empNo + "</td><td>" + Employees[i].EmpName + "</td><td>" + Employees[i].Salary + "</td><td>" + Employees[i].DeptName + "</td><td>" + Employees[i].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + empNo + "'/></td></tr>";
+                }
+            }, false)
+
+
+            var f = document.getElementById("1");
+            f.addEventListener('click', function () {
+                // document.getElementById("first").disabled = true
+                tbody.innerHTML = space;
+                var empNo = 0;
+                for (var i = 0; i <= 4; i++) {
+                    empNo = Employees[i].EmpNo;
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + empNo + "</td><td>" + Employees[i].EmpName + "</td><td>" + Employees[i].Salary + "</td><td>" + Employees[i].DeptName + "</td><td>" + Employees[i].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + empNo + "'/></td></tr>";
+                }
+            }, false);
+
+            var sec = document.getElementById("2");
+            sec.addEventListener('click', function () {
+                document.getElementById("first").classList.add("dissable");
+                var empNo = 0;
+                tbody.innerHTML = space;
+                for (var i = 5; i <= 9; i++) {
+                    empNo = Employees[i].EmpNo;
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + empNo + "</td><td>" + Employees[i].EmpName + "</td><td>" + Employees[i].Salary + "</td><td>" + Employees[i].DeptName + "</td><td>" + Employees[i].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + empNo + "'/></td></tr>";
+                }
+            }, false)
+
+            var third = document.getElementById("3");
+            third.addEventListener('click', function () {
+                var empNo = 0;
+                tbody.innerHTML = space;
+                for (var i = 10; i <= 14; i++) {
+                    empNo = Employees[i].EmpNo;
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + empNo + "</td><td>" + Employees[i].EmpName + "</td><td>" + Employees[i].Salary + "</td><td>" + Employees[i].DeptName + "</td><td>" + Employees[i].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + empNo + "'/></td></tr>";
+                }
+            }, false)
+
+            var fourth = document.getElementById("4");
+            fourth.addEventListener('click', function () {
+                var empNo = 0;
+                tbody.innerHTML = space;
+                for (var i = 15; i <= 19; i++) {
+                    empNo = Employees[i].EmpNo;
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + empNo + "</td><td>" + Employees[i].EmpName + "</td><td>" + Employees[i].Salary + "</td><td>" + Employees[i].DeptName + "</td><td>" + Employees[i].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + empNo + "'/></td></tr>";
+                }
+            }, false)
+
+            var fifth = document.getElementById("5");
+            fifth.addEventListener('click', function () {
+                var empNo = 0;
+                tbody.innerHTML = space;
+                for (var i = 20; i <= 24; i++) {
+                    empNo = Employees[i].EmpNo;
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + empNo + "</td><td>" + Employees[i].EmpName + "</td><td>" + Employees[i].Salary + "</td><td>" + Employees[i].DeptName + "</td><td>" + Employees[i].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + empNo + "'/></td></tr>";
+                }
+            }, false);
+
+            var sixth = document.getElementById("6");
+            sixth.addEventListener('click', function () {
+                var empNo = 0;
+                sixth.setAttribute("disabled", "true")
+                tbody.innerHTML = space;
+                for (var i = 25; i <= 29; i++) {
+                    empNo = Employees[i].EmpNo;
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + empNo + "</td><td>" + Employees[i].EmpName + "</td><td>" + Employees[i].Salary + "</td><td>" + Employees[i].DeptName + "</td><td>" + Employees[i].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + empNo + "'/></td></tr>";
+                }
+            }, false);
+
+            var seventh = document.getElementById("7");
+            seventh.addEventListener('click', function () {
+                var empNo = 0;
+                tbody.innerHTML = space;
+                for (var i = 30; i <= 34; i++) {
+                    empNo = Employees[i].EmpNo;
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + empNo + "</td><td>" + Employees[i].EmpName + "</td><td>" + Employees[i].Salary + "</td><td>" + Employees[i].DeptName + "</td><td>" + Employees[i].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + empNo + "'/></td></tr>";
+                }
+            }, false)
+
+            var eighth = document.getElementById("8");
+            eighth.addEventListener('click', function () {
+                var empNo = 0;
+                tbody.innerHTML = space;
+                for (var i = 35; i <= 39; i++) {
+                    empNo = Employees[i].EmpNo;
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + empNo + "</td><td>" + Employees[i].EmpName + "</td><td>" + Employees[i].Salary + "</td><td>" + Employees[i].DeptName + "</td><td>" + Employees[i].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + empNo + "'/></td></tr>";
+                }
+            }, false);
+
+            var last = document.getElementById("last");
+            last.addEventListener('click', function () {
+                last.setAttribute("disabled", "true")
+                console.log(last.getAttribute("disabled"))
+                tbody.innerHTML = space;
+                for (var i = 35; i <= 39; i++) {
+                    empNo = Employees[i].EmpNo;
+                    tbody.innerHTML += "<tr class='table-primary'><td>" + empNo + "</td><td>" + Employees[i].EmpName + "</td><td>" + Employees[i].Salary + "</td><td>" + Employees[i].DeptName + "</td><td>" + Employees[i].Designation + "</td><td><input type='button' id='edit" + Employees[index].EmpNo + "' value = 'Edit " + empNo + "'/></td></tr>";
+                }
+            }, false)
+
+            // var editBtn = document.getElementById("edit");
+            // editBtn.addEventListener('click',function(){
+
+            //     here = "";
+            //     here = '<div class="modal fade" id="themodal"> <div class="modal-dialog "><div class="modal-content"> <div class="modal-header"><h5 class="modal-title">The Employee Model</h5><button class="btn-close" data-bs-dismiss="modal"></button> </div><div class="modal-body"> <div class="form-group"> <label>EmpNo</label> input readonly type="text" class="form-control"> </div> <div class="form-group"> <label>EmpName</label> <input type="text" class="form-control"> </div> <div class="form-group"> <label>Salary</label> <input type="text" class="form-control"> </div> <div class="form-group"> <label>Designation</label> <select class="form-control form-select"> <option value="Manager">Managre</option> <option value="Clerk">Clerk</option> <option value="Operator">Operator</option> </select> </div> <div class="form-group"> <label>DeptName</label> <select class="form-select"> <option value="IT">Information Technology</option> <option value="SL">Sales</option> <option value="TR">Training</option> <option value="AC">Account</option> </select> </div> </div> <div class="modal-footer"> <div class="btn-group-large"> <input type="button" value="Update" class="btn btn-warning" data-bs-dismiss="modal"> <input type="button" value="Delete" class="btn btn-danger" data-bs-dismiss="modal"> </div> </div> </div> </div> </div>'
+            //     document.getElementById("here").innerHTML = here;
+            // },false);
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2 style="text-align: center;">Employee Data</h2>
+        <hr>
+        <table id="table" class="table table-bordered table-striped table-danger">
+            <thead>
+                <tr>
+                    <th>Employee Number</th>
+                    <th>Employee Name</th>
+                    <th>Salary</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody id="tbdy"></tbody>
+        </table>
+
+        <ul class="pagination justify-content-end">
+            <li class="page-item">
+                <a class="page-link" id="first" href="#">&laquofirst</a>
+                <!-- <input type="button" class="page-link" value="tt" id="first"/> -->
+                <!-- &larr; -->
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="1" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="2" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="3" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="4" href="#">4</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="5" href="#">5</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="6" href="#">6</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="7" href="#">7</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="8" href="#">8</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="last" href="#">Last&raquo;</a>
+            </li>
+        </ul>
+
+        <div id="here">
+            <div class="modal fade" id="themodal">
+                <div class="modal-dialog ">
+                    <!--Define Contents-->
+                    <div class="modal-content">
+                        <!--Define Headrs-->
+                        <div class="modal-header">
+                            <h5 class="modal-title">The Employee Model</h5>
+                            <!--btn-close will show the X button-->
+                            <button class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <!--Define Model Body-->
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>EmpNo</label>
+                                <input readonly type="text" class="form-control" id="emppId">
+                            </div>
+                            <div class="form-group">
+                                <label>EmpName</label>
+                                <input type="text" class="form-control" id="emppName">
+                            </div>
+                            <div class="form-group">
+                                <label>Salary</label>
+                                <input type="text" class="form-control" id="emppSalary">
+                            </div>
+                            <div class="form-group">
+                                <label>Designation</label>
+                                <select class="form-control form-select" id="emppDesign">
+                                    <option value="Manager">Manager</option>
+                                    <option value="Clerk">Clerk</option>
+                                    <option value="Operator">Operator</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>DeptName</label>
+                                <select class="form-select" id="emppDept">
+                                    <option value="IT">Information Technology</option>
+                                    <option value="SL">Sales</option>
+                                    <option value="TR">Training</option>
+                                    <option value="AC">Account</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--Model Footer-->
+                        <div class="modal-footer">
+                            <div class="btn-group-large">
+                                <!-- <input type="button" value="New" class="btn btn-primary" data-bs-dismiss="modal"> -->
+                                <!-- <input type="button" value="Save" class="btn btn-success" data-bs-dismiss="modal"> -->
+                                <input type="button" value="Update" id="emppUpdate" class="btn btn-warning"
+                                    data-bs-dismiss="modal">
+                                <input type="button" value="Closse" class="btn btn-danger" data-bs-dismiss="modal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

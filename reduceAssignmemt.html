@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./reduceAssignment.js"></script>
+    <!-- <script src="./../Transpiled/reduceAssignment.trs.js"></script> -->
+    <!-- <link rel="stylesheet" href="./../../../Blazmeanbatch3-main/node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="./../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <h3>Follow below steps</h3>
+
+    <ol>
+        <li>
+            npm install -g @babel/core
+        </li>
+        <li>
+            npm install -g @babel/cli
+        </li>
+        <li>
+            babel day6Nov21\SourceJS\reduceAssignment.js -o day6Nov21\Transpiled\reduceAssignment.trs.js
+        </li>
+    </ol>
+
+    <hr>
+    Category <input type="radio" name="rad" value="category" id="catId">
+    Manufracturer <input type="radio" name="rad" value="category" id="manId">
+    <input type="text" id="searchBar" placeholder="Search Here"/>
+    <hr>
+    <table  id="table" class="table table-bordered table-striped table-danger">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>CategoryName</th>
+                <th>Price</th>
+                <th>Manufacturer</th>
+            </tr>
+        </thead>
+        <tbody id="tbdy"></tbody>
+    </table>
+</body>
+</html>
