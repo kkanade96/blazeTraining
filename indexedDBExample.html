@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndexEdDb</title>
+    <script>
+        window.onload = function () {
+            indexedDbLogic();
+            var deptList = ['IT', 'HR','Manager','Sheth'];
+            var designationList = ['Java app developer', 'cloud app developer', 'UI/UX designer', ' Builder'];
+            var deptControl = document.getElementById('lstDept').innerHTML = setDropDown(deptList);
+            var designationControl = document.getElementById('lstDesignation').innerHTML = setDropDown(designationList);
+
+            var saveBtn = document.getElementById('btnSave');
+            saveBtn.addEventListener('click', saveInDb, false);
+
+            var clrBtn = document.getElementById("btnClear");
+            clrBtn.addEventListener('click',clearInputs,false);
+
+            var loadBtn = document.getElementById('btnLoad');
+            loadBtn.addEventListener('click',loadData,false);
+
+            var loadBtnUpdate = document.getElementById('btnUpdate');
+            loadBtnUpdate.addEventListener('click',updateData,false);
+
+            var loadDeptBtn = document.getElementById('btnDeptLoad');
+            loadDeptBtn.addEventListener('click',loadDepartmentData,false);
+
+            var loadDesBtn = document.getElementById('btnDesLoad');
+            loadDesBtn.addEventListener('click',loadDesignationData,false);
+
+        }
+
+        function loadData(){
+            var records = [];
+            var filteredRecords = [];
+            myDb = window.indexedDB.open("EmployeeDb");
+
+            if(myDb){
+                myDb.onsuccess = function(e){
+                    var transaction = e.target.result.transaction('Employees','readwrite');
+                    tableObj = transaction.objectStore('Employees');
+
+                    tableObj.openCursor().onsuccess = function(e){
+                        var dataReader = e.target.result;
+                        // magical if
+                        if(dataReader){
+                            records.push(dataReader.value);
+                            dataReader.continue();
+                        }else{
+                             document.getElementById('msg').innerHTML= JSON.stringify(records);
+                        }
+                    }
+                };
+            }
+        }
+
+        function updateData(){
+            var employee = {
+                "id": parseInt(document.getElementById('empId').value),
+                "EmployeeId": document.getElementById('empId').value,
+                "EmployeeName": document.getElementById('empName').value,
+                "EmployeeDepartment": document.getElementById('lstDept').value,
+                "EmployeeDesignation": document.getElementById('lstDesignation').value
+            };
+
+            myDb = window.indexedDB.open("EmployeeDb");
+            
+            if (myDb) {
+                myDb.onsuccess = function(e){
+                    console.log("hee")
+                    //retrive transaction object
+                    var transaction = e.target.result.transaction('Employees', 'readwrite');
+                    tableObj = transaction.objectStore("Employees");
+                    console.log(employee);
+                    var operation = tableObj.put(employee);
+
+                    operation.onsuccess = function (e) {
+                        document.getElementById('msg').innerHTML = 'Record is added successfully ';
+                        console.log("Record is updated successfully ");
+                    };
+                    
+                    operation.onerror = function (e) {
+                        document.getElementById('msg').innerHTML = 'Add Operation failed ';
+                        console.log("Failed");
+                    }
+                }
+            } else {
+                document.getElementById('msg').innerHTML = 'Error Occured while opening database ';
+            }
+        }
+        
+        function loadDesignationData(){
+            var records = [];
+            var filteredRecords = [];
+            myDb = window.indexedDB.open("EmployeeDb");
+
+            if(myDb){
+                myDb.onsuccess = function(e){
+                    var transaction = e.target.result.transaction('Employees','readwrite');
+                    tableObj = transaction.objectStore('Employees');
+
+                    tableObj.openCursor().onsuccess = function(e){
+                        var dataReader = e.target.result;
+                        // magical if
+                        if(dataReader){
+                            records.push(dataReader.value);
+                            dataReader.continue();
+                        }else{
+                             for(var i = 0;i<records.length;i++){
+                                 if(records[i].EmployeeDesignation == document.getElementById('lstDesignation').value){
+                                    filteredRecords.push(records[i]);
+                                 }
+                             }
+                             document.getElementById('msg').innerHTML= JSON.stringify(filteredRecords);
+                        }
+                    }
+                };
+            }
+        }
+        function loadDepartmentData(){
+            var records = [];
+            var filteredRecords = [];
+            myDb = window.indexedDB.open("EmployeeDb");
+
+            if(myDb){
+                myDb.onsuccess = function(e){
+                    var transaction = e.target.result.transaction('Employees','readwrite');
+                    tableObj = transaction.objectStore('Employees');
+
+                    tableObj.openCursor().onsuccess = function(e){
+                        var dataReader = e.target.result;
+                        // magical if
+                        if(dataReader){
+                            records.push(dataReader.value);
+                            dataReader.continue();
+                        }else{
+                             for(var i = 0;i<records.length;i++){
+                                 if(records[i].EmployeeDepartment == document.getElementById('lstDept').value){
+                                    filteredRecords.push(records[i]);
+                                 }
+                             }
+                             document.getElementById('msg').innerHTML= JSON.stringify(filteredRecords);
+                        }
+                    }
+                };
+            }
+        }
+
+        function clearInputs(){
+            var inputs = document.getElementsByClassName('c');
+            for(var i=0;i<inputs.length;i++){
+                inputs[i].value = '';
+            }
+        }; 
+
+        function indexedDbLogic() {
+            // myDb;
+            var table;
+
+            // Create database if not exists else open it
+            var myDb = window.indexedDB.open('EmployeeDb', 1);
+            //what is 1 for ? -> versioning
+
+            //onupgradeneeded -> here we create table as ObjectStore with columns as createIndex
+            myDb.onupgradeneeded = function (e) {
+                var dbReference = e.target.result;//didn't get -> get db->target -> & result says it is ready to perform operations
+                
+                table = dbReference.createObjectStore('Employees', { keyPath: 'id' });
+                var constrains = { unique: false };
+                
+                table.createIndex('EmployeeId1', 'EmployeeId', constrains);
+                table.createIndex('EmployeeName1', 'EmployeeName', constrains);
+                table.createIndex('EmployeeDepartment1', 'EmployeeDepartment', constrains);
+                table.createIndex('EmployeeDesignation1', 'EmployeeDesignation', constrains);
+                
+                document.getElementById('msg').innerHTML = 'Database is created successfully and Object STore is created';
+            }
+
+            myDb.onsucess = function (e) {
+                document.getElementById('msg').innerHTML = 'Opened DB Successfully' + e;
+            }
+            myDb.onerror = function (e) {
+                document.getElementById('msg').innerHTML = 'Error occured while opening db connection' + e;
+            }
+            
+        }
+        
+        function saveInDb() {
+            var employee = {
+                "id": parseInt(document.getElementById('empId').value),
+                "EmployeeId": document.getElementById('empId').value,
+                "EmployeeName": document.getElementById('empName').value,
+                "EmployeeDepartment": document.getElementById('lstDept').value,
+                "EmployeeDesignation": document.getElementById('lstDesignation').value
+            };
+            
+            myDb = window.indexedDB.open("EmployeeDb");
+            
+            if (myDb) {
+                myDb.onsuccess = function(e){
+                    console.log("hee")
+                    //retrive transaction object
+                    var transaction = e.target.result.transaction('Employees', 'readwrite');
+                    tableObj = transaction.objectStore("Employees");
+                    console.log(employee);
+                    var operation = tableObj.add(employee);
+
+                    operation.onsuccess = function (e) {
+                        document.getElementById('msg').innerHTML = 'Record is added successfully ';
+                        console.log("Record is added successfully ");
+                    };
+                    
+                    operation.onerror = function (e) {
+                        document.getElementById('msg').innerHTML = 'Add Operation failed ';
+                        console.log("Failed");
+                    }
+                }
+            } else {
+                document.getElementById('msg').innerHTML = 'Error Occured while opening database ';
+            }
+        }
+
+
+        function setDropDown(dataSource) {
+            var option = "";
+            for (var i in dataSource) {
+                option += '<option value="' + dataSource[i] + '">' + dataSource[i] + '</option>';
+            }
+            return option;
+        }
+    </script>
+</head>
+
+<body>
+    <h3>Fill Employee details below:</h3>
+    <form>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        Employee Number:
+                    </td>
+                    <td>
+                        <input type="number" min="1" max="50" id="empId" class="c" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Employee Name:
+                    </td>
+                    <td>
+                        <input type="text" id="empName" class="c" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Select Department:
+                    </td>
+                    <td>
+                        <select id="lstDept"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Select Designation:
+                    </td>
+                    <td>
+                        <select id="lstDesignation" required></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="reset" value="Clear Data" id="btnClear">
+                    </td>
+                    <td>
+                        <input type="submit" value="Save Data" id="btnSave">
+                    </td>
+                    <td>
+                        <input type="button" value="Load by Designation" id="btnDesLoad">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Update Data" id="btnUpdate">
+                    </td>
+                    <td>
+                        <input type="button" value="Load Employees" id="btnLoad">
+                    </td>
+                    <td>
+                        <input type="button" value="Load by Department" id="btnDeptLoad">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="msg" style="color: darkblue"></div>
+    </form>
+</body>
+
+</html>
